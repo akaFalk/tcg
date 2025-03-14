@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmn5fanrrjxmq"]
+
+[ext_resource type="Script" uid="uid://c8o56jfrdmy7j" path="res://entities/card_slots/card_slot.gd" id="1_dimjs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q578t"]
+size = Vector3(0.960274, 1.43478, 0.0131836)
+
+[node name="CardSlot" type="Node3D"]
+script = ExtResource("1_dimjs")
+
+[node name="CardSlotImage" type="Sprite3D" parent="."]
+render_priority = -5
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_q578t")

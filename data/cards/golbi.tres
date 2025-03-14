@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CreatureCardData" load_steps=3 format=3 uid="uid://d0jwr8o7i8v0a"]
+
+[ext_resource type="Script" uid="uid://dj8b3weeeuoqk" path="res://entities/cards/creature/creature_card_data.gd" id="1_j5ake"]
+[ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://entities/cards/card-blank.png" id="1_xmq6s"]
+
+[resource]
+script = ExtResource("1_j5ake")
+attack = 1
+health = 1
+name = "golbi"
+cost = 1
+type = 0
+description = "this is golbi poggi"
+image = ExtResource("1_xmq6s")
+metadata/_custom_type_script = "uid://dj8b3weeeuoqk"
