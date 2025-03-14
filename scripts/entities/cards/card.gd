@@ -123,5 +123,5 @@ func attempt_play() -> bool:
 
 # --- Default Card Behavior ---
 func play() -> void:
-	print("Playing card: " + card_data.card_name)
+	print("Playing card: " + card_data.name)
 	# Override in child classes for type-specific behavior.

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellCardData" load_steps=3 format=3 uid="uid://bljy587kualaq"]
 
-[ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://entities/cards/card-blank.png" id="1_oa1tl"]
-[ext_resource type="Script" uid="uid://daoem74nvprfe" path="res://entities/cards/spell/spell_card_data.gd" id="2_oa1tl"]
+[ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://assets/card-blank.png" id="1_oa1tl"]
+[ext_resource type="Script" uid="uid://daoem74nvprfe" path="res://scripts/resources/cards/spell_card_data.gd" id="2_oa1tl"]
 
 [resource]
 script = ExtResource("2_oa1tl")

@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfdwcd1r7jop7"]
 
-[ext_resource type="Script" uid="uid://0p7oy6b8vqoe" path="res://entities/cards/base/card.gd" id="1_q5fv7"]
-[ext_resource type="Texture2D" uid="uid://ddxe5w2bf737n" path="res://assets/card-back2.png" id="2_n3ktt"]
-[ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://entities/cards/card-blank.png" id="2_q65dp"]
+[ext_resource type="Script" uid="uid://0p7oy6b8vqoe" path="res://scripts/entities/cards/card.gd" id="1_jl6rh"]
+[ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://assets/card-blank.png" id="2_73nwn"]
+[ext_resource type="Texture2D" uid="uid://ddxe5w2bf737n" path="res://assets/card-back2.png" id="3_1q37b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iancf"]
 size = Vector3(0.961975, 1.44071, 0.0043335)
 
 [node name="Card" type="Node3D" node_paths=PackedStringArray("name_label", "cost_label", "type_label", "description_label", "card_image_sprite", "card_back_image_sprite")]
-script = ExtResource("1_q5fv7")
+script = ExtResource("1_jl6rh")
 name_label = NodePath("Labels/Name")
 cost_label = NodePath("Labels/Cost")
 type_label = NodePath("Labels/Type")
@@ -18,7 +18,7 @@ card_back_image_sprite = NodePath("CardImageBack")
 
 [node name="CardImage" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001)
-texture = ExtResource("2_q65dp")
+texture = ExtResource("2_73nwn")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -26,7 +26,7 @@ texture = ExtResource("2_q65dp")
 shape = SubResource("BoxShape3D_iancf")
 
 [node name="CardImageBack" type="Sprite3D" parent="."]
-texture = ExtResource("2_n3ktt")
+texture = ExtResource("3_1q37b")
 
 [node name="Labels" type="Node3D" parent="."]
 

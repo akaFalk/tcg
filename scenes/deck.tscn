@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c55oevxm0q8ee"]
 
-[ext_resource type="Script" uid="uid://cmpd0xeyqwx0q" path="res://entities/decks/deck.gd" id="1_iwvh5"]
+[ext_resource type="Script" uid="uid://cmpd0xeyqwx0q" path="res://scripts/entities/deck.gd" id="1_iwvh5"]
 [ext_resource type="Texture2D" uid="uid://ddxe5w2bf737n" path="res://assets/card-back2.png" id="2_rvthe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbcxn"]
