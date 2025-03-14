@@ -37,7 +37,7 @@ func _ready() -> void:
 	set_phase(Phase.START)
 
 func start_new_turn() -> void:
-	current_player = _get_opponent_id()
+	current_player = _get_next_player()
 	is_first_turn = false
 	turn_started.emit(current_player)
 	set_phase(Phase.START)
@@ -109,5 +109,5 @@ func _start_phase_timer() -> void:
 func _get_current_player_data() -> PlayerData:
 	return GameManager.player_data if current_player == PlayerData.Type.PLAYER else GameManager.opponent_data
 
-func _get_opponent_id() -> PlayerData.Type:
+func _get_next_player() -> PlayerData.Type:
 	return PlayerData.Type.PLAYER if current_player == PlayerData.Type.OPPONENT else PlayerData.Type.OPPONENT

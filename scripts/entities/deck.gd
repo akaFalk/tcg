@@ -4,8 +4,6 @@ const CARD_Z_OFFSET: float = 0.005
 
 @export var card_loader: CardLoader
 @export var card_manager: CardManager
-@export var collision: CollisionShape3D
-@export var sprite: Sprite3D
 @export var player: PlayerData.Type = PlayerData.Type.PLAYER
 
 signal card_drawn(card: Card)
@@ -31,13 +29,6 @@ func draw_card() -> void:
 	if cards.is_empty(): return
 	
 	var drawn_card: Card = cards.pop_front()
-	update_deck_state()
 	
 	drawn_card.set_labels_visible(player == PlayerData.Type.PLAYER)
 	emit_signal("card_drawn", drawn_card)
-	
-
-func update_deck_state() -> void:
-	if cards.is_empty():
-		collision.disabled = true
-		sprite.visible = false

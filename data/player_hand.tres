@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="HandConfig" load_steps=2 format=3 uid="uid://c5g282k7lsafi"]
+
+[ext_resource type="Script" uid="uid://cqt7kjjqetyy5" path="res://scripts/entities/hands/hand_config.gd" id="1_n1yt1"]
+
+[resource]
+script = ExtResource("1_n1yt1")
+screen_margin = 0.2
+hand_distance_from_camera = 3.2
+vertical_offset = -0.5
+flip = 180
+fan_angle = 30.0
+z_spacing = 0.01
+vertical_arc_height = 2.0
+min_radius = 1.0
+max_radius = 3.0
+min_cards_for_growth = 2
+max_cards_for_growth = 10
+card_scale = Vector3(0.5, 0.5, 0.5)
+face_rotation_y = 0.0
+show_labels = true

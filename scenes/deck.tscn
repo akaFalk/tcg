@@ -6,10 +6,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbcxn"]
 size = Vector3(0.963623, 1.43956, 0.00338745)
 
-[node name="Deck" type="Node3D" node_paths=PackedStringArray("collision", "sprite")]
+[node name="Deck" type="Node3D"]
 script = ExtResource("1_iwvh5")
-collision = NodePath("Area3D/CollisionShape3D")
-sprite = NodePath("Sprite3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 visible = false
