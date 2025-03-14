@@ -44,6 +44,7 @@ func remove_card_from_hand(card: Card) -> void:
 		update_hand_positions()
 
 func update_hand_positions() -> void:
+	_on_hand_updated()
 	var card_count = cards.size()
 	var current_radius = _calculate_dynamic_radius(card_count)
 	
@@ -104,6 +105,9 @@ func _get_viewport_margin_position() -> Vector2:
 	return Vector2.ZERO
 
 func _on_phase_changed(new_phase: TurnSystem.Phase) -> void:
+	pass
+	
+func _on_hand_updated() -> void:
 	pass
 
 func _calculate_vertical_offset(radian_angle: float) -> float:

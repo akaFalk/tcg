@@ -18,6 +18,9 @@ func _get_viewport_margin_position() -> Vector2:
 
 func _on_phase_changed(new_phase: TurnSystem.Phase) -> void:
 	_update_card_playability()
+	
+func _on_hand_updated() -> void:
+	_update_card_playability()
 
 func _update_card_playability() -> void:
 	for card in cards:
