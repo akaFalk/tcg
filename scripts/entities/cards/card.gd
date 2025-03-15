@@ -70,7 +70,6 @@ func interactable(value: bool) -> void:
 
 func check_playability() -> void:
 	var conditions = card_data.get_play_conditions()
-	is_playable
 	
 	for condition in conditions:
 		if not condition.validate(self):

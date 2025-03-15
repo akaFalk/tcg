@@ -1,11 +1,11 @@
 class_name PlayerHand extends BaseHand
 
-@export var player: Player
+@export var resource_component: ResourceComponent
 
 func _ready():
 	super._ready()
 	EventBus.CARD_PLAYED.connect(_on_card_played)
-	player.resources_changed.connect(_on_resources_changed)
+	resource_component.resources_changed.connect(_on_resources_changed)
 	
 func _on_card_played(card: Card) -> void:
 	if card in cards:

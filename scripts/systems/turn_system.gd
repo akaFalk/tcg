@@ -81,8 +81,8 @@ func _not_first_turn() -> bool:
 func _handle_start_phase() -> void:
 	# Resource increment logic
 	var player = _get_current_player_data()
-	player.increase_max_resources()
-	player.refresh_resources()
+	player.resource_component.increase_max()
+	player.resource_component.refresh()
 	
 	_start_phase_timer()
 
