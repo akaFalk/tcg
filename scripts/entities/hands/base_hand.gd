@@ -80,8 +80,7 @@ func _remove_card_from_hand(card: Card) -> void:
 
 func _configure_card(card: Card) -> void:
 	card.scale = config.card_scale
-	card._ui.set_labels_visible(config.show_labels)
-	card.rotation_degrees.y = config.face_rotation_y
+	card.show_card(config.show_card)
 
 func _calculate_dynamic_radius(card_count: int) -> float:
 	if card_count <= config.min_cards_for_growth:

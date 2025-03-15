@@ -41,6 +41,9 @@ func initialize(data: CardData) -> void:
 	_ui.update_appearance(data)
 	_ui.set_labels_visible(false)
 	interactable(false)
+	
+func show_card(show: bool) -> void:
+	_ui.set_labels_visible(show)
 
 # --- Render Priority ---
 func update_render_priority(priority: int) -> void:

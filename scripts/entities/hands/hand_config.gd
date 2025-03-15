@@ -4,7 +4,6 @@ class_name HandConfig extends Resource
 @export var screen_margin: float = 0.2            # Margin from screen edge
 @export var hand_distance_from_camera: float = 3.2
 @export var vertical_offset: float = 0.5          # Vertical offset from base position
-@export var flip: int = 180
 
 @export_group("Fan Layout")
 @export var fan_angle: float = 30.0               # Total spread angle in degrees
@@ -19,5 +18,4 @@ class_name HandConfig extends Resource
 
 @export_group("Visuals")
 @export var card_scale: Vector3 = Vector3(0.5, 0.5, 0.5)
-@export var face_rotation_y: float = 0.0          # Y rotation for card facing
-@export var show_labels: bool = true
+@export var show_card: bool = true

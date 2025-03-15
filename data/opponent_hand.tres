@@ -17,4 +17,4 @@ min_cards_for_growth = 2
 max_cards_for_growth = 10
 card_scale = Vector3(0.5, 0.5, 0.5)
 face_rotation_y = 0.0
-show_labels = true
+show_card = false

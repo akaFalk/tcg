@@ -1,4 +1,3 @@
-# scripts/ui/card_ui.gd
 class_name CardUI extends Node3D
 
 @export var labels: Node3D

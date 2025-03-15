@@ -16,9 +16,3 @@ func _get_viewport_margin_position() -> Vector2:
 		var size = viewport.get_visible_rect().size
 		return Vector2(size.x * 0.5, size.y * config.screen_margin)
 	return Vector2.ZERO
-
-func _configure_card(card: Card) -> void:
-	super._configure_card(card)
-	# Opponent-specific configuration
-	card._ui.set_labels_visible(false)
-	card.rotation_degrees.y = 180
