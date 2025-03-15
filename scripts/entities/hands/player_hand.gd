@@ -1,5 +1,20 @@
 class_name PlayerHand extends BaseHand
 
+@export var drag_drop_system: DragAndDropSystem
+
+func _ready():
+	super._ready()
+	drag_drop_system.card_played.connect(_on_card_played)
+	
+func _on_card_played(card: Card) -> void:
+	if card in cards:
+		_remove_card_from_hand(card)
+		card.interactable(false)
+		
+func _on_card_drawn(card: Card) -> void:
+	super._on_card_drawn(card)
+	card.interactable(true)
+
 func _calculate_vertical_offset(radian_angle: float) -> float:
 	return (cos(radian_angle) - 1) * config.vertical_arc_height
 

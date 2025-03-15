@@ -14,15 +14,7 @@ func accepts_card_type(card: Card) -> bool:
 
 func add_card(card: Card) -> void:
 	card.attempt_play()
-	
 	card.position = position
 	card.scale = scale
-	card.card_image_sprite.modulate = Color.WHITE
-	card.update_card_render(0)
-	
-	# Disable the collision shape for the dropped card.
-	var collision_shape: CollisionShape3D = card.get_node("Area3D/CollisionShape3D")
-	if collision_shape:
-		collision_shape.disabled = true
 	
 	card_in_slot = true

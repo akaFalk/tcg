@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://crf02py6ivrhs"]
+[gd_scene load_steps=21 format=3 uid="uid://crf02py6ivrhs"]
 
-[ext_resource type="Script" uid="uid://3gwct2hgy3es" path="res://scripts/systems/card_manager.gd" id="1_fnqc8"]
+[ext_resource type="Script" uid="uid://3gwct2hgy3es" path="res://scripts/systems/input/card_hover_system.gd" id="1_fnqc8"]
 [ext_resource type="Texture2D" uid="uid://xs2i50m3otqy" path="res://assets/card-back1.png" id="2_85g3d"]
 [ext_resource type="Texture2D" uid="uid://d0gp1c48nitab" path="res://assets/card-back4.png" id="2_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cmn5fanrrjxmq" path="res://scenes/card_slot.tscn" id="3_0w6vj"]
@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://c5g282k7lsafi" path="res://data/player_hand.tres" id="3_muem4"]
 [ext_resource type="Script" uid="uid://c5jpt1q3vulgi" path="res://scripts/entities/hands/player_hand.gd" id="4_1nvsg"]
 [ext_resource type="PackedScene" uid="uid://c55oevxm0q8ee" path="res://scenes/deck.tscn" id="6_85g3d"]
-[ext_resource type="Script" uid="uid://c6iv3vhdxdf6g" path="res://scripts/systems/input_manager.gd" id="6_n1dqr"]
+[ext_resource type="Script" uid="uid://c6iv3vhdxdf6g" path="res://scripts/systems/input/input_handler.gd" id="6_n1dqr"]
 [ext_resource type="Script" uid="uid://b1g1uel55m1wn" path="res://scripts/ui/resource_ui.gd" id="8_jkv2x"]
 [ext_resource type="Script" uid="uid://cmpd0xeyqwx0q" path="res://scripts/entities/deck.gd" id="8_trceg"]
 [ext_resource type="Script" uid="uid://csyh2jvs65m0n" path="res://scripts/systems/card_loader.gd" id="9_85g3d"]
@@ -18,6 +18,8 @@
 [ext_resource type="Resource" uid="uid://dl1xtg5su8pd6" path="res://data/opponent_hand.tres" id="13_dp3eg"]
 [ext_resource type="Script" uid="uid://c3nrlmec2nmty" path="res://scripts/systems/turn_system.gd" id="15_dp3eg"]
 [ext_resource type="Resource" uid="uid://dfnxn5fdrxn8c" path="res://data/players/opponent_data.tres" id="17_muem4"]
+[ext_resource type="Script" uid="uid://cajpxfavse5a5" path="res://scripts/systems/input/collision_system.gd" id="19_0ld40"]
+[ext_resource type="Script" uid="uid://p6wa4dd26yhg" path="res://scripts/systems/input/drag_and_drop_system.gd" id="20_gqmmt"]
 
 [node name="Main" type="Node3D"]
 
@@ -29,16 +31,18 @@ script = ExtResource("9_85g3d")
 
 [node name="PlayerField" type="Node3D" parent="."]
 
-[node name="PlayerHand" type="Node3D" parent="PlayerField" node_paths=PackedStringArray("camera", "turn_system")]
+[node name="PlayerHand" type="Node3D" parent="PlayerField" node_paths=PackedStringArray("drag_drop_system", "camera", "turn_system", "deck")]
 script = ExtResource("4_1nvsg")
+drag_drop_system = NodePath("../../Systems/Input/DragAndDropSystem")
 config = ExtResource("3_muem4")
 camera = NodePath("../../Camera3D")
 turn_system = NodePath("../../Systems/TurnSystem")
+deck = NodePath("../Deck")
 
-[node name="Deck" parent="PlayerField" node_paths=PackedStringArray("card_loader", "card_manager") instance=ExtResource("6_85g3d")]
+[node name="Deck" parent="PlayerField" node_paths=PackedStringArray("card_loader", "card_hover_system") instance=ExtResource("6_85g3d")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.7, 0.4, 0)
 card_loader = NodePath("../../CardLoader")
-card_manager = NodePath("../../Systems/CardManager")
+card_hover_system = NodePath("../../Systems/Input/CardHoverSystem")
 
 [node name="CreatureCardSlot1" parent="PlayerField" instance=ExtResource("3_0w6vj")]
 transform = Transform3D(0.50088, 0, 0, 0, 0.50088, 0, 0, 0, 0.50088, 0.9, 1.2, 0)
@@ -120,18 +124,19 @@ transform = Transform3D(0.50088, 0, 0, 0, 0.50088, 0, 0, 0, 0.50088, 2.7, 2.3, 0
 slot_type = 2
 image = ExtResource("3_choun")
 
-[node name="Deck" type="Node3D" parent="OpponentField" node_paths=PackedStringArray("card_loader", "card_manager")]
+[node name="Deck" type="Node3D" parent="OpponentField" node_paths=PackedStringArray("card_loader", "card_hover_system")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.3, 3.1, 0)
 script = ExtResource("8_trceg")
 card_loader = NodePath("../../CardLoader")
-card_manager = NodePath("../../Systems/CardManager")
+card_hover_system = NodePath("../../Systems/Input/CardHoverSystem")
 player = 1
 
-[node name="OpponentHand" type="Node3D" parent="OpponentField" node_paths=PackedStringArray("camera", "turn_system")]
+[node name="OpponentHand" type="Node3D" parent="OpponentField" node_paths=PackedStringArray("camera", "turn_system", "deck")]
 script = ExtResource("10_a8y0u")
 config = ExtResource("13_dp3eg")
 camera = NodePath("../../Camera3D")
 turn_system = NodePath("../../Systems/TurnSystem")
+deck = NodePath("../Deck")
 
 [node name="ResourcesUI" type="Control" parent="OpponentField"]
 layout_mode = 3
@@ -160,12 +165,26 @@ script = ExtResource("9_choun")
 [node name="TurnSystem" type="Node3D" parent="Systems"]
 script = ExtResource("15_dp3eg")
 
-[node name="CardManager" type="Node3D" parent="Systems" node_paths=PackedStringArray("player_hand", "input_manager")]
-script = ExtResource("1_fnqc8")
-player_hand = NodePath("../../PlayerField/PlayerHand")
-input_manager = NodePath("../InputManager")
+[node name="Input" type="Node3D" parent="Systems"]
 
-[node name="InputManager" type="Node3D" parent="Systems" node_paths=PackedStringArray("card_manager", "player_hand")]
+[node name="CollisionSystem" type="Node3D" parent="Systems/Input"]
+script = ExtResource("19_0ld40")
+metadata/_custom_type_script = "uid://cajpxfavse5a5"
+
+[node name="InputHandler" type="Node3D" parent="Systems/Input" node_paths=PackedStringArray("collision_system", "drag_drop_system")]
 script = ExtResource("6_n1dqr")
-card_manager = NodePath("../CardManager")
-player_hand = NodePath("../../PlayerField/PlayerHand")
+collision_system = NodePath("../CollisionSystem")
+drag_drop_system = NodePath("../DragAndDropSystem")
+metadata/_custom_type_script = "uid://c6iv3vhdxdf6g"
+
+[node name="DragAndDropSystem" type="Node3D" parent="Systems/Input" node_paths=PackedStringArray("camera", "collision_system")]
+script = ExtResource("20_gqmmt")
+camera = NodePath("../../../Camera3D")
+collision_system = NodePath("../CollisionSystem")
+metadata/_custom_type_script = "uid://p6wa4dd26yhg"
+
+[node name="CardHoverSystem" type="Node3D" parent="Systems/Input" node_paths=PackedStringArray("player_hand", "drag_and_drop_system")]
+script = ExtResource("1_fnqc8")
+player_hand = NodePath("../../../PlayerField/PlayerHand")
+drag_and_drop_system = NodePath("../DragAndDropSystem")
+metadata/_custom_type_script = "uid://3gwct2hgy3es"

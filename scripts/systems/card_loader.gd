@@ -17,6 +17,5 @@ func create_card(card_name: String) -> Card:
 	
 	var card_scene: Resource = load(scene_path)
 	var card: Card = card_scene.instantiate()
-	card.set_card_data(card_data)
-	card.set_labels_visible(false)
+	card.initialize(card_data)
 	return card

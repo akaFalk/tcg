@@ -3,7 +3,7 @@ class_name Deck extends Node3D
 const CARD_Z_OFFSET: float = 0.005
 
 @export var card_loader: CardLoader
-@export var card_manager: CardManager
+@export var card_hover_system: CardHoverSystem
 @export var player: PlayerData.Type = PlayerData.Type.PLAYER
 
 signal card_drawn(card: Card)
@@ -23,12 +23,10 @@ func initialize_deck() -> void:
 		var z_position = (total_cards - 1 - index) * CARD_Z_OFFSET
 		card.position = Vector3(position.x, position.y, position.z + z_position)
 		card.scale = scale
-		card_manager.add_child(card)
+		card_hover_system.add_child(card)
 
 func draw_card() -> void:
 	if cards.is_empty(): return
 	
 	var drawn_card: Card = cards.pop_front()
-	
-	drawn_card.set_labels_visible(player == PlayerData.Type.PLAYER)
 	emit_signal("card_drawn", drawn_card)

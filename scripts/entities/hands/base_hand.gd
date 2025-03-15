@@ -6,6 +6,7 @@ signal card_removed(card: Card)
 @export var config: HandConfig
 @export var camera: Camera3D
 @export var turn_system: TurnSystem
+@export var deck: Deck
 
 var cards: Array[Card] = []
 var hand_base_position: Vector3
@@ -16,6 +17,7 @@ func _ready() -> void:
 		camera = get_viewport().get_camera_3d()
 	get_viewport().connect("size_changed", update_hand_base_position)
 	update_hand_base_position()
+	deck.connect("card_drawn", _on_card_drawn)
 
 	if turn_system:
 		turn_system.phase_changed.connect(_on_phase_changed)
@@ -30,18 +32,6 @@ func update_hand_base_position() -> void:
 	
 	hand_base_position = ray_origin + ray_dir * config.hand_distance_from_camera
 	hand_base_position += camera.global_transform.basis.y * config.vertical_offset
-
-func add_card(card: Card) -> void:
-	cards.append(card)
-	card_added.emit(card)
-	_configure_card(card)
-	update_hand_positions()
-
-func remove_card_from_hand(card: Card) -> void:
-	if card in cards:
-		cards.erase(card)
-		card_removed.emit(card)
-		update_hand_positions()
 
 func update_hand_positions() -> void:
 	_on_hand_updated()
@@ -72,10 +62,25 @@ func update_hand_positions() -> void:
 		var target_rotation = _calculate_target_rotation(angle)
 		
 		_animate_card(card, target_position, target_rotation, i)
+		
+func _on_card_drawn(card: Card) -> void:
+	_add_card(card)
+
+func _add_card(card: Card) -> void:
+	cards.append(card)
+	card_added.emit(card)
+	_configure_card(card)
+	update_hand_positions()
+
+func _remove_card_from_hand(card: Card) -> void:
+	if card in cards:
+		cards.erase(card)
+		card_removed.emit(card)
+		update_hand_positions()
 
 func _configure_card(card: Card) -> void:
 	card.scale = config.card_scale
-	card.set_labels_visible(config.show_labels)
+	card._ui.set_labels_visible(config.show_labels)
 	card.rotation_degrees.y = config.face_rotation_y
 
 func _calculate_dynamic_radius(card_count: int) -> float:
@@ -99,6 +104,7 @@ func _animate_card(card: Card, target_position: Vector3, target_rotation: Vector
 	var tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(card, "global_position", target_position, 0.15)
 	tween.tween_property(card, "rotation_degrees", target_rotation, 0.15)
+
 
 # Abstract methods to be implemented in subclasses
 func _get_viewport_margin_position() -> Vector2:

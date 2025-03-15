@@ -20,5 +20,5 @@ func _get_viewport_margin_position() -> Vector2:
 func _configure_card(card: Card) -> void:
 	super._configure_card(card)
 	# Opponent-specific configuration
-	card.set_labels_visible(false)
+	card._ui.set_labels_visible(false)
 	card.rotation_degrees.y = 180

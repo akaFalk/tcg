@@ -1,36 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfdwcd1r7jop7"]
+[gd_scene load_steps=6 format=3 uid="uid://dfdwcd1r7jop7"]
 
 [ext_resource type="Script" uid="uid://0p7oy6b8vqoe" path="res://scripts/entities/cards/card.gd" id="1_jl6rh"]
+[ext_resource type="Script" uid="uid://c6gy58kd2afkd" path="res://scripts/entities/cards/card_ui.gd" id="2_1q37b"]
 [ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://assets/card-blank.png" id="2_73nwn"]
 [ext_resource type="Texture2D" uid="uid://ddxe5w2bf737n" path="res://assets/card-back2.png" id="3_1q37b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iancf"]
 size = Vector3(0.961975, 1.44071, 0.0043335)
 
-[node name="Card" type="Node3D" node_paths=PackedStringArray("name_label", "cost_label", "type_label", "description_label", "card_image_sprite", "card_back_image_sprite")]
+[node name="Card" type="Node3D" node_paths=PackedStringArray("_ui", "_collision_shape")]
 script = ExtResource("1_jl6rh")
-name_label = NodePath("Labels/Name")
-cost_label = NodePath("Labels/Cost")
-type_label = NodePath("Labels/Type")
-description_label = NodePath("Labels/Description")
-card_image_sprite = NodePath("CardImage")
-card_back_image_sprite = NodePath("CardImageBack")
-
-[node name="CardImage" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001)
-texture = ExtResource("2_73nwn")
+_ui = NodePath("CardUI")
+_collision_shape = NodePath("Area3D/CollisionShape3D")
 
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_iancf")
 
-[node name="CardImageBack" type="Sprite3D" parent="."]
-texture = ExtResource("3_1q37b")
+[node name="CardUI" type="Node3D" parent="." node_paths=PackedStringArray("labels", "name_label", "cost_label", "type_label", "description_label", "card_image", "card_back")]
+script = ExtResource("2_1q37b")
+labels = NodePath("Labels")
+name_label = NodePath("Labels/Name")
+cost_label = NodePath("Labels/Cost")
+type_label = NodePath("Labels/Type")
+description_label = NodePath("Labels/Description")
+card_image = NodePath("CardImage")
+card_back = NodePath("CardImageBack")
 
-[node name="Labels" type="Node3D" parent="."]
+[node name="Labels" type="Node3D" parent="CardUI"]
 
-[node name="Name" type="Label3D" parent="Labels"]
+[node name="Name" type="Label3D" parent="CardUI/Labels"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.4, 0.581, 0)
 render_priority = 5
 modulate = Color(0, 0, 0, 1)
@@ -38,14 +38,14 @@ text = "Test Card Name"
 font_size = 16
 horizontal_alignment = 0
 
-[node name="Cost" type="Label3D" parent="Labels"]
+[node name="Cost" type="Label3D" parent="CardUI/Labels"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.3, 0.581, 0)
 render_priority = 5
 modulate = Color(0, 0, 0, 1)
 text = "2"
 font_size = 16
 
-[node name="Type" type="Label3D" parent="Labels"]
+[node name="Type" type="Label3D" parent="CardUI/Labels"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.4, 0.003, 0)
 render_priority = 5
 modulate = Color(0, 0, 0, 1)
@@ -53,7 +53,7 @@ text = "Creature"
 font_size = 16
 horizontal_alignment = 0
 
-[node name="Description" type="Label3D" parent="Labels"]
+[node name="Description" type="Label3D" parent="CardUI/Labels"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.4, -0.061, 0)
 render_priority = 5
 modulate = Color(0, 0, 0, 1)
@@ -63,6 +63,13 @@ horizontal_alignment = 0
 vertical_alignment = 0
 autowrap_mode = 3
 width = 165.0
+
+[node name="CardImage" type="Sprite3D" parent="CardUI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001)
+texture = ExtResource("2_73nwn")
+
+[node name="CardImageBack" type="Sprite3D" parent="CardUI"]
+texture = ExtResource("3_1q37b")
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
