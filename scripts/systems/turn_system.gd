@@ -15,7 +15,7 @@ signal turn_ended(player_id: String)
 
 @export var stack: Stack
 
-@export var starting_player: PlayerData.Type = PlayerData.Type.PLAYER
+@export var starting_player: Player.Type = Player.Type.PLAYER
 @export var initial_phase_durations := {
 	Phase.START: 0.5,
 	Phase.DRAW: 1.0,
@@ -25,7 +25,7 @@ signal turn_ended(player_id: String)
 }
 
 var current_phase: Phase = Phase.END
-var current_player: PlayerData.Type
+var current_player: Player.Type
 var is_first_turn: bool = true
 var phase_timer: Timer
 
@@ -80,9 +80,9 @@ func _not_first_turn() -> bool:
 
 func _handle_start_phase() -> void:
 	# Resource increment logic
-	var player_data = _get_current_player_data()
-	player_data.increase_max_resources()
-	player_data.refresh_resources()
+	var player = _get_current_player_data()
+	player.increase_max_resources()
+	player.refresh_resources()
 	
 	_start_phase_timer()
 
@@ -106,8 +106,8 @@ func _start_phase_timer() -> void:
 	var duration = initial_phase_durations.get(current_phase, 1.0)
 	phase_timer.start(duration)
 
-func _get_current_player_data() -> PlayerData:
-	return GameManager.player_data if current_player == PlayerData.Type.PLAYER else GameManager.opponent_data
+func _get_current_player_data() -> Player:
+	return GameManager.player if current_player == Player.Type.PLAYER else GameManager.opponent
 
-func _get_next_player() -> PlayerData.Type:
-	return PlayerData.Type.PLAYER if current_player == PlayerData.Type.OPPONENT else PlayerData.Type.OPPONENT
+func _get_next_player() -> Player.Type:
+	return Player.Type.PLAYER if current_player == Player.Type.OPPONENT else Player.Type.OPPONENT

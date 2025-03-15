@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TurnOwnershipCondition" load_steps=2 format=3 uid="uid://dignl10tpy5rs"]
+
+[ext_resource type="Script" uid="uid://3dey3r6dh8kl" path="res://scripts/resources/conditions/turn_ownership_condition.gd" id="1_aq4y2"]
+
+[resource]
+script = ExtResource("1_aq4y2")
+metadata/_custom_type_script = "uid://3dey3r6dh8kl"

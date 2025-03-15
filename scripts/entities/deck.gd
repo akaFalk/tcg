@@ -4,7 +4,7 @@ const CARD_Z_OFFSET: float = 0.005
 
 @export var card_loader: CardLoader
 @export var card_hover_system: CardHoverSystem
-@export var player: PlayerData.Type = PlayerData.Type.PLAYER
+@export var player: Player
 @export var deck_definition: DeckDefinition
 
 signal card_drawn(card: Card)

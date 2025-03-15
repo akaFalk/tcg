@@ -1,10 +1,11 @@
 class_name PlayerHand extends BaseHand
 
-@export var drag_drop_system: DragAndDropSystem
+@export var player: Player
 
 func _ready():
 	super._ready()
-	drag_drop_system.card_played.connect(_on_card_played)
+	EventBus.CARD_PLAYED.connect(_on_card_played)
+	player.resources_changed.connect(_on_resources_changed)
 	
 func _on_card_played(card: Card) -> void:
 	if card in cards:
@@ -31,12 +32,15 @@ func _get_viewport_margin_position() -> Vector2:
 		return Vector2(size.x * 0.5, size.y * (1.0 - config.screen_margin))
 	return Vector2.ZERO
 
-func _on_phase_changed(new_phase: TurnSystem.Phase) -> void:
+func _on_phase_changed(_new_phase: TurnSystem.Phase) -> void:
 	_update_card_playability()
 	
 func _on_hand_updated() -> void:
 	_update_card_playability()
 
+func _on_resources_changed(current_resources: int, max_resources: int) -> void:
+	_update_card_playability()
+
 func _update_card_playability() -> void:
 	for card in cards:
-		card.check_playability(GameManager.player_data)
+		card.check_playability()

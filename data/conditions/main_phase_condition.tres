@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PhaseCondition" load_steps=2 format=3 uid="uid://rif0tvvox16k"]
+
+[ext_resource type="Script" uid="uid://3baxoruox2c0" path="res://scripts/resources/conditions/phase_condition.gd" id="1_uocbf"]
+
+[resource]
+script = ExtResource("1_uocbf")
+valid_phases = Array[int]([2])
+metadata/_custom_type_script = "uid://3baxoruox2c0"

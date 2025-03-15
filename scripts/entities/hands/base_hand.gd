@@ -109,23 +109,23 @@ func _animate_card(card: Card, target_position: Vector3, target_rotation: Vector
 func _get_viewport_margin_position() -> Vector2:
 	return Vector2.ZERO
 
-func _on_phase_changed(new_phase: TurnSystem.Phase) -> void:
+func _on_phase_changed(_new_phase: TurnSystem.Phase) -> void:
 	pass
 	
 func _on_hand_updated() -> void:
 	pass
 
-func _calculate_vertical_offset(radian_angle: float) -> float:
+func _calculate_vertical_offset(_radian_angle: float) -> float:
 	# Default implementation (can be abstract)
 	assert(false, "Must be overridden in child classes")
 	return 0.0
 
-func _calculate_z_position(base_z: float, index: int) -> float:
+func _calculate_z_position(_base_z: float, _index: int) -> float:
 	# Default implementation
 	assert(false, "Must be overridden in child classes")
 	return 0.0
 
-func _calculate_target_rotation(angle: float) -> Vector3:
+func _calculate_target_rotation(_angle: float) -> Vector3:
 	# Default implementation
 	assert(false, "Must be overridden in child classes")
 	return Vector3.ZERO

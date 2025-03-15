@@ -8,14 +8,19 @@ class_name CardUI extends Node3D
 @export var card_image: Sprite3D
 @export var card_back: Sprite3D
 
-var target_scale := Vector3.ONE
-
 func update_appearance(data: CardData) -> void:
 	card_image.texture = data.image
 	name_label.text = data.name
 	cost_label.text = str(data.cost)
 	type_label.text = data.get_type_as_string()
 	description_label.text = data.description
+	_update_condition_text(data)
+
+func _update_condition_text(data: CardData) -> void:
+	var tooltip = "\n"
+	for condition in data.get_condition_texts():
+		tooltip += "• " + condition + "\n"
+	description_label.text += tooltip
 
 func set_render_priority(priority: int) -> void:
 	card_image.render_priority = priority
@@ -31,9 +36,9 @@ func animate_hover(active: bool) -> void:
 	tween.tween_property(self, "position", target_pos, 0.15)
 	tween.tween_property(self, "scale", target_scale, 0.15)
 
-func set_labels_visible(visible: bool) -> void:
+func set_labels_visible(labels_visible: bool) -> void:
 	for label in labels.get_children():
-		label.visible = visible
+		label.visible = labels_visible
 
 func set_playable_visuals(playable: bool) -> void:
 	card_image.modulate = Color(0.8, 1.0, 0.8) if playable else Color.WHITE

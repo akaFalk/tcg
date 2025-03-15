@@ -4,8 +4,6 @@ class_name DragAndDropSystem extends Node3D
 @export var collision_system: CollisionSystem
 @export var screen_margin: int = 50
 
-signal card_played(card: Card)
-
 var drag_plane_normal: Vector3
 var drag_plane_point: Vector3
 var dragged_card: Card
@@ -56,7 +54,7 @@ func finish_drag() -> void:
 	var slot = collision_system.get_slot_under_mouse()
 	if slot && slot.accepts_card_type(dragged_card):
 		slot.add_card(dragged_card)
-		card_played.emit(dragged_card)
+		EventBus.CARD_PLAYED.emit(dragged_card)
 	else:
 		_return_card_to_hand()
 	

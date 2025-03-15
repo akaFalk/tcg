@@ -1,7 +1,11 @@
-[gd_resource type="Resource" script_class="CreatureCardData" load_steps=3 format=3 uid="uid://d0jwr8o7i8v0a"]
+[gd_resource type="Resource" script_class="CreatureCardData" load_steps=7 format=3 uid="uid://d0jwr8o7i8v0a"]
 
 [ext_resource type="Script" uid="uid://dj8b3weeeuoqk" path="res://scripts/resources/cards/creature_card_data.gd" id="1_j5ake"]
 [ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://assets/card-blank.png" id="1_xmq6s"]
+[ext_resource type="Script" uid="uid://gjj7fbhf4jt" path="res://scripts/resources/conditions/play_condition.gd" id="2_bhxqm"]
+[ext_resource type="Resource" uid="uid://cmdcwjey1xs5q" path="res://data/conditions/cost_condition.tres" id="3_n08ro"]
+[ext_resource type="Resource" uid="uid://rif0tvvox16k" path="res://data/conditions/main_phase_condition.tres" id="4_n08ro"]
+[ext_resource type="Resource" uid="uid://dignl10tpy5rs" path="res://data/conditions/turn_ownership_condition.tres" id="5_p6ylv"]
 
 [resource]
 script = ExtResource("1_j5ake")
@@ -12,4 +16,5 @@ cost = 1
 type = 0
 description = "this is golbi poggi"
 image = ExtResource("1_xmq6s")
+play_conditions = Array[ExtResource("2_bhxqm")]([ExtResource("3_n08ro"), ExtResource("4_n08ro"), ExtResource("5_p6ylv")])
 metadata/_custom_type_script = "uid://dj8b3weeeuoqk"

@@ -14,7 +14,7 @@ var target_rotation: Vector3 = Vector3.ZERO
 
 # --- Card Data ---
 var card_data: CardData
-var player: PlayerData.Type
+var player: Player
 
 var is_playable: bool = false :
 	set(value):
@@ -42,8 +42,8 @@ func initialize(data: CardData) -> void:
 	_ui.set_labels_visible(false)
 	interactable(false)
 	
-func show_card(show: bool) -> void:
-	_ui.set_labels_visible(show)
+func show_card(show_card: bool) -> void:
+	_ui.set_labels_visible(show_card)
 
 # --- Render Priority ---
 func update_render_priority(priority: int) -> void:
@@ -68,8 +68,16 @@ func on_finish_drag() -> void:
 func interactable(value: bool) -> void:
 	_collision_shape.disabled = !value
 
-func check_playability(player_data: PlayerData) -> void:
-	is_playable = CardValidator.validate(self, player_data)
+func check_playability() -> void:
+	var conditions = card_data.get_play_conditions()
+	is_playable
+	
+	for condition in conditions:
+		if not condition.validate(self):
+			is_playable = false
+			return
+	
+	is_playable = true
 
 func attempt_play() -> bool:
 	if !is_playable:
@@ -79,11 +87,6 @@ func attempt_play() -> bool:
 	_ui.animate_hover(false)
 	is_playable = false
 	interactable(false)
-		
-	if player == PlayerData.Type.PLAYER:
-		GameManager.player_data.spend_resources(card_data.cost)
-	else:
-		GameManager.opponent_data.spend_resources(card_data.cost)
 	
 	play()
 	return true

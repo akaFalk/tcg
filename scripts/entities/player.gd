@@ -1,4 +1,4 @@
-class_name PlayerData extends Resource
+class_name Player extends Node3D
 
 enum Type { PLAYER, OPPONENT }
 
@@ -13,6 +13,9 @@ var health: int = 30:
 		health_changed.emit(health)
 var current_resources: int = 0
 var max_resources: int = 0
+
+func _ready():
+	EventBus.CARD_PLAYED.connect(_on_card_played)
 
 func refresh_resources() -> void:
 	current_resources = max_resources
@@ -31,3 +34,7 @@ func can_afford(cost: int) -> bool:
 func spend_resources(amount: int) -> void:
 	current_resources = max(0, current_resources - amount)
 	resources_changed.emit(current_resources, max_resources)
+	
+func _on_card_played(card: Card) -> void:
+	if card.player.type == type:
+		spend_resources(card.card_data.cost)
