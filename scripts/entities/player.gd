@@ -6,6 +6,7 @@ signal resources_changed(current: int, max_resources: int)
 signal health_changed(new_health: int)
 
 @export var type: Type
+@export var card_slots: Node3D
 
 var health: int = 30:
 	set(value):
@@ -26,7 +27,13 @@ func increase_max_resources() -> void:
 	resources_changed.emit(current_resources, max_resources)
 
 func can_play_card(card: Card) -> bool:
-	return can_afford(card.card_data.cost)
+	return can_afford(card.card_data.cost) && has_card_slot(card.card_data.type)
+
+func has_card_slot(type: CardData.Type) -> bool:
+	for card_slot in card_slots.get_children():
+		if card_slot.slot_type == type and !card_slot.card_in_slot:
+			return true
+	return false
 
 func can_afford(cost: int) -> bool:
 	return current_resources >= cost

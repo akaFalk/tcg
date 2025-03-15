@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SpellCardData" load_steps=5 format=3 uid="uid://bljy587kualaq"]
+[gd_resource type="Resource" script_class="SpellCardData" load_steps=6 format=3 uid="uid://bljy587kualaq"]
 
 [ext_resource type="Texture2D" uid="uid://0vux8y8ma3g5" path="res://assets/card-blank.png" id="1_oa1tl"]
 [ext_resource type="Script" uid="uid://gjj7fbhf4jt" path="res://scripts/resources/conditions/play_condition.gd" id="2_awnsg"]
 [ext_resource type="Script" uid="uid://daoem74nvprfe" path="res://scripts/resources/cards/spell_card_data.gd" id="2_oa1tl"]
 [ext_resource type="Resource" uid="uid://cmdcwjey1xs5q" path="res://data/conditions/cost_condition.tres" id="3_007pi"]
+[ext_resource type="Resource" uid="uid://bd4gswtt4wkkn" path="res://data/conditions/field_condition.tres" id="4_007pi"]
 
 [resource]
 script = ExtResource("2_oa1tl")
@@ -13,5 +14,5 @@ cost = 2
 type = 1
 description = "this is zpell"
 image = ExtResource("1_oa1tl")
-play_conditions = Array[ExtResource("2_awnsg")]([ExtResource("3_007pi")])
+play_conditions = Array[ExtResource("2_awnsg")]([ExtResource("3_007pi"), ExtResource("4_007pi")])
 metadata/_custom_type_script = "uid://daoem74nvprfe"

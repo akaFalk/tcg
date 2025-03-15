@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="FieldCondition" load_steps=2 format=3 uid="uid://bd4gswtt4wkkn"]
+
+[ext_resource type="Script" uid="uid://k87xusmo01ml" path="res://scripts/resources/conditions/field_condition.gd" id="1_olbhk"]
+
+[resource]
+script = ExtResource("1_olbhk")
+metadata/_custom_type_script = "uid://k87xusmo01ml"
