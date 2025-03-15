@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://crf02py6ivrhs"]
+[gd_scene load_steps=22 format=3 uid="uid://crf02py6ivrhs"]
 
 [ext_resource type="Script" uid="uid://3gwct2hgy3es" path="res://scripts/systems/input/card_hover_system.gd" id="1_fnqc8"]
 [ext_resource type="Texture2D" uid="uid://xs2i50m3otqy" path="res://assets/card-back1.png" id="2_85g3d"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ctun7c2ec82y7" path="res://assets/card-back3.png" id="3_choun"]
 [ext_resource type="Resource" uid="uid://c5g282k7lsafi" path="res://data/player_hand.tres" id="3_muem4"]
 [ext_resource type="Script" uid="uid://c5jpt1q3vulgi" path="res://scripts/entities/hands/player_hand.gd" id="4_1nvsg"]
+[ext_resource type="Resource" uid="uid://blh20038k3j8k" path="res://data/dummy_deck.tres" id="5_yc10j"]
 [ext_resource type="PackedScene" uid="uid://c55oevxm0q8ee" path="res://scenes/deck.tscn" id="6_85g3d"]
 [ext_resource type="Script" uid="uid://c6iv3vhdxdf6g" path="res://scripts/systems/input/input_handler.gd" id="6_n1dqr"]
 [ext_resource type="Script" uid="uid://b1g1uel55m1wn" path="res://scripts/ui/resource_ui.gd" id="8_jkv2x"]
@@ -43,6 +44,7 @@ deck = NodePath("../Deck")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.7, 0.4, 0)
 card_loader = NodePath("../../CardLoader")
 card_hover_system = NodePath("../../Systems/Input/CardHoverSystem")
+deck_definition = ExtResource("5_yc10j")
 
 [node name="CreatureCardSlot1" parent="PlayerField" instance=ExtResource("3_0w6vj")]
 transform = Transform3D(0.50088, 0, 0, 0, 0.50088, 0, 0, 0, 0.50088, 0.9, 1.2, 0)
@@ -130,6 +132,7 @@ script = ExtResource("8_trceg")
 card_loader = NodePath("../../CardLoader")
 card_hover_system = NodePath("../../Systems/Input/CardHoverSystem")
 player = 1
+deck_definition = ExtResource("5_yc10j")
 
 [node name="OpponentHand" type="Node3D" parent="OpponentField" node_paths=PackedStringArray("camera", "turn_system", "deck")]
 script = ExtResource("10_a8y0u")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DeckDefinition" load_steps=5 format=3 uid="uid://blh20038k3j8k"]
+
+[ext_resource type="Script" uid="uid://bgokkv64q1uju" path="res://scripts/resources/cards/card_data.gd" id="1_txy66"]
+[ext_resource type="Script" uid="uid://bpbh3m0e045nv" path="res://scripts/resources/deck_definition.gd" id="2_7hequ"]
+[ext_resource type="Resource" uid="uid://d0jwr8o7i8v0a" path="res://data/cards/golbi.tres" id="2_by38t"]
+[ext_resource type="Resource" uid="uid://bljy587kualaq" path="res://data/cards/magic_card.tres" id="3_6i32b"]
+
+[resource]
+script = ExtResource("2_7hequ")
+cards = Array[ExtResource("1_txy66")]([ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("2_by38t"), ExtResource("3_6i32b"), ExtResource("3_6i32b"), ExtResource("2_by38t"), ExtResource("3_6i32b"), ExtResource("3_6i32b"), ExtResource("3_6i32b"), ExtResource("3_6i32b"), ExtResource("3_6i32b")])
+metadata/_custom_type_script = "uid://bpbh3m0e045nv"

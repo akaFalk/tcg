@@ -3,9 +3,7 @@ class_name CardLoader extends Node
 const CREATURE_CARD_SCENE_PATH = "res://scenes/cards/creature_card.tscn"
 const SPELL_CARD_SCENE_PATH = "res://scenes/cards/spell_card.tscn"
 
-func create_card(card_name: String) -> Card:
-	var card_data: CardData = load("res://data/cards/" + card_name.to_snake_case() + ".tres")
-	
+func create_card(card_data: CardData) -> Card:
 	var scene_path: String
 	match card_data.type:
 		CardData.Type.CREATURE:
