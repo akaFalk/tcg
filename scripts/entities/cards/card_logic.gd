@@ -5,8 +5,7 @@ signal playability_changed(is_playable: bool)
 signal card_played()
 
 # Shared Properties
-var card_data: CardData
-var player: Player
+var model: CardModel
 var is_playable: bool = false :
 	set(value):
 		if is_playable != value:
@@ -15,25 +14,24 @@ var is_playable: bool = false :
 
 # Dependencies
 var slot_manager: SlotManager:
-	get: return player.slot_manager if player else null
+	get: return model.owner.slot_manager
 
 var resource_component: ResourceComponent:
-	get: return player.resource_component if player else null
+	get: return model.owner.resource_component
 
-func _init(data: CardData, player_ref: Player) -> void:
-	card_data = data
-	player = player_ref
+func _init(model_ref: CardModel) -> void:
+	model = model_ref
 
 func check_playability() -> void:
 	var was_playable = is_playable
-	var conditions = card_data.get_play_conditions()
+	var conditions = model.data.get_play_conditions()
 	
 	for condition in conditions:
-		if not condition.validate(self):
+		if not condition.validate(model):
 			is_playable = false
 			return
 	
-	is_playable = resource_component.can_afford(card_data.cost) && slot_manager.has_available_slot(card_data.type)
+	is_playable = resource_component.can_afford(model.data.cost) && slot_manager.has_available_slot(model.data.type)
 	
 	if was_playable != is_playable:
 		playability_changed.emit(is_playable)
@@ -42,6 +40,6 @@ func attempt_play() -> bool:
 	if !is_playable:
 		return false
 	
-	resource_component.spend(card_data.cost)
+	resource_component.spend(model.data.cost)
 	card_played.emit()
 	return true

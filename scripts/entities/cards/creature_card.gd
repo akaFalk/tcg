@@ -1,12 +1,8 @@
-class_name CreatureCard extends Card
+class_name CreatureCard extends CardView
 
 @export var attack_health_label: Label3D
 
-func _ready() -> void:
-	#super._ready()
-	attack_health_label.text = str(logic.card_data.attack) + "/" + str(logic.card_data.health)
-
-func play() -> void:
-	logic.attempt_play()
-	print("Summoning Creature: %s" % logic.card_data.name)
-	# Creature-specific logic here
+func initialize_view(model: CardModel) -> void:
+	super.initialize_view(model)
+	attack_health_label.text = str(model.data.attack) + "/" + str(model.data.health)
+	attack_health_label.visible = false

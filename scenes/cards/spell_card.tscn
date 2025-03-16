@@ -1,5 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://7h13imbhulea"]
+[gd_scene load_steps=3 format=3 uid="uid://7h13imbhulea"]
 
 [ext_resource type="PackedScene" uid="uid://dfdwcd1r7jop7" path="res://scenes/cards/card.tscn" id="1_td24p"]
+[ext_resource type="Script" uid="uid://cl40gudqvk32k" path="res://scripts/entities/cards/spell_card.gd" id="2_ckvji"]
 
-[node name="Card" instance=ExtResource("1_td24p")]
+[node name="CardView" instance=ExtResource("1_td24p")]
+script = ExtResource("2_ckvji")

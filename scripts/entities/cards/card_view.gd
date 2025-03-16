@@ -5,8 +5,6 @@ class_name CardView extends Node3D
 @export var _collision_shape: CollisionShape3D
 
 # Signals for input
-signal hovered(card_view: CardView)
-signal hovered_off(card_view: CardView)
 signal drag_started
 signal drag_ended
 
@@ -15,8 +13,8 @@ var hand_render_priority: int = 0
 var target_rotation: Vector3
 var hand_position: Vector3
 
-func initialize_view(data: CardData) -> void:
-	_ui.update_appearance(data)
+func initialize_view(model: CardModel) -> void:
+	_ui.update_appearance(model.data)
 	_ui.set_labels_visible(false)
 	set_interactable(false)
 	
@@ -38,10 +36,10 @@ func set_render_priority(priority: int) -> void:
 
 # Input Handlers set through inspector node
 func _on_area_3d_mouse_entered() -> void:
-	hovered.emit(self)
+	CardHoverSystem.card_view_hovered.emit(self)
 
 func _on_area_3d_mouse_exited() -> void:
-	hovered_off.emit(self)
+	CardHoverSystem.card_view_hovered_off.emit(self)
 
 func start_drag() -> void:
 	drag_started.emit()

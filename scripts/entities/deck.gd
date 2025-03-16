@@ -19,7 +19,6 @@ func initialize_deck() -> void:
 	for card_data in deck_definition.cards:
 		var card: Card = card_loader.create_card(card_data, player)
 		card_hover_system.add_child(card)
-		card.initialize(card_data, player)
 		cards.append(card)
 		
 		var z_position = (total_cards - 1 - index) * CARD_Z_OFFSET

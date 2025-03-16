@@ -42,4 +42,4 @@ func _on_resources_changed(_current_resources: int, _max_resources: int) -> void
 
 func _update_card_playability() -> void:
 	for card in cards:
-		card.check_playability()
+		card.model.check_playability()

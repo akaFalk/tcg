@@ -1,6 +1,6 @@
 class_name PlayCondition extends Resource
 
-func validate(_logic: CardLogic) -> bool:
+func validate(_model: CardModel) -> bool:
 	assert(false, "Not implemented")
 	return false
 

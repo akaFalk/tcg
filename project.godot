@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scripts/systems/game_manager.gd"
 EventBus="*res://scripts/systems/event_bus.gd"
+CardHoverSystem="*res://scripts/systems/input/card_hover_system.gd"
 
 [display]
 

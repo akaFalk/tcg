@@ -60,6 +60,7 @@ func finish_drag() -> void:
 	
 	dragged_card.view.end_drag()
 	dragged_card = null
+	CardHoverSystem.should_hover = true
 	
 func _return_card_to_hand() -> void:
 	var tween = get_tree().create_tween().set_parallel(true)
