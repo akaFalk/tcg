@@ -4,17 +4,16 @@ class_name PlayerHand extends BaseHand
 
 func _ready():
 	super._ready()
-	EventBus.CARD_PLAYED.connect(_on_card_played)
+	EventBus.card_played.connect(_on_card_played)
 	resource_component.resources_changed.connect(_on_resources_changed)
 	
 func _on_card_played(card: Card) -> void:
 	if card in cards:
 		_remove_card_from_hand(card)
-		card.interactable(false)
 		
 func _on_card_drawn(card: Card) -> void:
 	super._on_card_drawn(card)
-	card.interactable(true)
+	card.view.set_interactable(true)
 
 func _calculate_vertical_offset(radian_angle: float) -> float:
 	return (cos(radian_angle) - 1) * config.vertical_arc_height
@@ -38,7 +37,7 @@ func _on_phase_changed(_new_phase: TurnSystem.Phase) -> void:
 func _on_hand_updated() -> void:
 	_update_card_playability()
 
-func _on_resources_changed(current_resources: int, max_resources: int) -> void:
+func _on_resources_changed(_current_resources: int, _max_resources: int) -> void:
 	_update_card_playability()
 
 func _update_card_playability() -> void:

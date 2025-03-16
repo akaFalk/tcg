@@ -1,8 +1,8 @@
 class_name ResourceCondition extends PlayCondition
 
 
-func validate(_card: Card) -> bool:
-	return _card.player.resource_component.can_afford(_card.card_data.cost)
+func validate(_logic: CardLogic) -> bool:
+	return _logic.player.resource_component.can_afford(_logic.card_data.cost)
 
 func get_condition_text() -> String:
 	return ""

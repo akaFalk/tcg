@@ -197,9 +197,8 @@ camera = NodePath("../../../Camera3D")
 collision_system = NodePath("../CollisionSystem")
 metadata/_custom_type_script = "uid://p6wa4dd26yhg"
 
-[node name="CardHoverSystem" type="Node3D" parent="Systems/Input" node_paths=PackedStringArray("player_hand", "drag_and_drop_system")]
+[node name="CardHoverSystem" type="Node3D" parent="Systems/Input" node_paths=PackedStringArray("drag_and_drop_system")]
 script = ExtResource("1_fnqc8")
-player_hand = NodePath("../../../Player/PlayerHand")
 drag_and_drop_system = NodePath("../DragAndDropSystem")
 metadata/_custom_type_script = "uid://3gwct2hgy3es"
 

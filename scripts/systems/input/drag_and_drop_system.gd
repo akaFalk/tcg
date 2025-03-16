@@ -14,8 +14,8 @@ func _process(_delta: float) -> void:
 
 func start_drag(card: Card) -> void:
 	dragged_card = card
-	_calculate_drag_plane(card.position)
-	dragged_card.on_start_drag()
+	_calculate_drag_plane(card.view.position)
+	dragged_card.view.start_drag()
 
 func _calculate_drag_plane(card_position: Vector3) -> void:
 	if camera:
@@ -36,7 +36,7 @@ func update_dragged_position() -> void:
 	if t < 0: return
 	
 	var target_pos = ray_origin + ray_dir * t
-	dragged_card.position = _clamp_position_to_screen(target_pos)
+	dragged_card.view.position = _clamp_position_to_screen(target_pos)
 
 func _clamp_position_to_screen(world_pos: Vector3) -> Vector3:
 	var viewport = get_viewport()
@@ -54,15 +54,15 @@ func finish_drag() -> void:
 	var slot = collision_system.get_slot_under_mouse()
 	if slot && slot.accepts_card_type(dragged_card):
 		slot.add_card(dragged_card)
-		EventBus.CARD_PLAYED.emit(dragged_card)
+		EventBus.card_played.emit(dragged_card)
 	else:
 		_return_card_to_hand()
 	
-	dragged_card.on_finish_drag()
+	dragged_card.view.end_drag()
 	dragged_card = null
 	
 func _return_card_to_hand() -> void:
 	var tween = get_tree().create_tween().set_parallel(true)
-	tween.tween_property(dragged_card, "position", dragged_card.hand_position, 0.15)
-	tween.tween_property(dragged_card, "rotation_degrees", dragged_card.target_rotation, 0.15)
-	tween.tween_property(dragged_card, "scale", Vector3(0.5, 0.5, 0.5), 0.15)
+	tween.tween_property(dragged_card.view, "position", dragged_card.view.hand_position, 0.15)
+	tween.tween_property(dragged_card.view, "rotation_degrees", dragged_card.view.target_rotation, 0.15)
+	tween.tween_property(dragged_card.view, "scale", Vector3(0.5, 0.5, 0.5), 0.15)

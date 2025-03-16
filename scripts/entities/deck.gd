@@ -17,14 +17,14 @@ func initialize_deck() -> void:
 	var index = 0
 	
 	for card_data in deck_definition.cards:
-		var card: Card = card_loader.create_card(card_data)
-		card.player = player
+		var card: Card = card_loader.create_card(card_data, player)
+		card_hover_system.add_child(card)
+		card.initialize(card_data, player)
 		cards.append(card)
 		
 		var z_position = (total_cards - 1 - index) * CARD_Z_OFFSET
-		card.position = Vector3(position.x, position.y, position.z + z_position)
-		card.scale = scale
-		card_hover_system.add_child(card)
+		card.view.position = Vector3(position.x, position.y, position.z + z_position)
+		card.view.scale = scale
 		index += 1
 
 func draw_card() -> void:

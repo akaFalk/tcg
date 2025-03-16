@@ -79,8 +79,9 @@ func _remove_card_from_hand(card: Card) -> void:
 		update_hand_positions()
 
 func _configure_card(card: Card) -> void:
-	card.scale = config.card_scale
-	card.show_card(config.show_card)
+	card.view.scale = config.card_scale
+	card.view.show_labels(config.show_card)
+	#card.view.set_interactable(true)
 
 func _calculate_dynamic_radius(card_count: int) -> float:
 	if card_count <= config.min_cards_for_growth:
@@ -96,13 +97,13 @@ func _calculate_dynamic_radius(card_count: int) -> float:
 	return lerp(config.min_radius, config.max_radius, t)
 
 func _animate_card(card: Card, target_position: Vector3, target_rotation: Vector3, index: int) -> void:
-	card.target_rotation = target_rotation
-	card.hand_position = target_position
-	card.update_render_priority(index)
+	card.view.target_rotation = target_rotation
+	card.view.hand_position = target_position
+	card.view.set_render_priority(index)
 	
 	var tween = get_tree().create_tween().set_parallel(true)
-	tween.tween_property(card, "global_position", target_position, 0.15)
-	tween.tween_property(card, "rotation_degrees", target_rotation, 0.15)
+	tween.tween_property(card.view, "position", target_position, 0.15)
+	tween.tween_property(card.view, "rotation_degrees", target_rotation, 0.15)
 
 
 # Abstract methods to be implemented in subclasses

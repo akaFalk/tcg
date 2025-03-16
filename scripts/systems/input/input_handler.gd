@@ -17,7 +17,8 @@ func _input(event: InputEvent) -> void:
 			drag_drop_system.finish_drag()
 
 func _handle_card_selection() -> void:
-	var card = collision_system.get_card_under_mouse()
-	if card:
+	var card_view = collision_system.get_card_under_mouse()
+	if card_view:
+		var card = card_view.get_parent()
 		card_selected.emit(card)
 		drag_drop_system.start_drag(card)

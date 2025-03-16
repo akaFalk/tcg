@@ -2,8 +2,8 @@ class_name CollisionSystem extends Node3D
 
 @export var ray_distance: float = 1000.0
 
-func get_card_under_mouse() -> Card:
-	return _raycast(1) as Card  # 1 = COLLISION_MASK_CARD
+func get_card_under_mouse() -> CardView:
+	return _raycast(1) as CardView  # 1 = COLLISION_MASK_CARD
 
 func get_slot_under_mouse() -> CardSlot:
 	return _raycast(2) as CardSlot  # 2 = COLLISION_MASK_CARD_SLOT

@@ -5,9 +5,9 @@
 
 [node name="Card" node_paths=PackedStringArray("attack_health_label") instance=ExtResource("1_yf7hg")]
 script = ExtResource("2_tovrq")
-attack_health_label = NodePath("CardUI/Labels/AttackHealth")
+attack_health_label = NodePath("CardView/CardUI/Labels/AttackHealth")
 
-[node name="AttackHealth" type="Label3D" parent="CardUI/Labels" index="4"]
+[node name="AttackHealth" type="Label3D" parent="CardView/CardUI/Labels" index="4"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.3, -0.579, 0)
 render_priority = 5
 modulate = Color(0, 0, 0, 1)

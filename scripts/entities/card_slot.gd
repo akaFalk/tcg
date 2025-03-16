@@ -10,11 +10,12 @@ func _ready() -> void:
 	$CardSlotImage.texture = image
 	
 func accepts_card_type(card: Card) -> bool:
-	return slot_type == card.card_data.type and !card_in_slot and card.is_playable
+	return slot_type == card.logic.card_data.type and !card_in_slot and card.logic.is_playable
 
 func add_card(card: Card) -> void:
 	card.attempt_play()
-	card.position = position
-	card.scale = scale
+	card.view.position = position
+	card.view.scale = scale
+	card.view.set_interactable(false)
 	
 	card_in_slot = true
