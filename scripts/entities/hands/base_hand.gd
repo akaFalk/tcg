@@ -81,7 +81,6 @@ func _remove_card_from_hand(card: Card) -> void:
 func _configure_card(card: Card) -> void:
 	card.view.scale = config.card_scale
 	card.view.show_labels(config.show_card)
-	#card.view.set_interactable(true)
 
 func _calculate_dynamic_radius(card_count: int) -> float:
 	if card_count <= config.min_cards_for_growth:

@@ -13,6 +13,7 @@ func _process(_delta: float) -> void:
 		update_dragged_position()
 
 func start_drag(card: Card) -> void:
+	CardHoverSystem.should_hover = false
 	dragged_card = card
 	_calculate_drag_plane(card.view.position)
 	dragged_card.view.start_drag()
@@ -54,7 +55,6 @@ func finish_drag() -> void:
 	var slot = collision_system.get_slot_under_mouse()
 	if slot && slot.accepts_card_type(dragged_card):
 		slot.add_card(dragged_card)
-		EventBus.card_played.emit(dragged_card)
 	else:
 		_return_card_to_hand()
 	

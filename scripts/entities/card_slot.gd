@@ -16,6 +16,6 @@ func add_card(card: Card) -> void:
 	card.model.attempt_play()
 	card.view.position = position
 	card.view.scale = scale
-	card.view.set_interactable(false)
 	
 	card_in_slot = true
+	EventBus.card_played.emit(card)

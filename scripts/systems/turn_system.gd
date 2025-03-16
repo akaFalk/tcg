@@ -19,8 +19,8 @@ signal turn_ended(player_id: String)
 @export var initial_phase_durations := {
 	Phase.START: 0.5,
 	Phase.DRAW: 1.0,
-	Phase.MAIN: 30.0,
-	Phase.BATTLE: 15.0,
+	Phase.MAIN: 7.0,
+	Phase.BATTLE: 1.0,
 	Phase.END: 0.5
 }
 

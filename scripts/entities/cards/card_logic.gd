@@ -2,7 +2,6 @@ class_name CardLogic extends RefCounted
 
 # Signals for gameplay events
 signal playability_changed(is_playable: bool)
-signal card_played()
 
 # Shared Properties
 var model: CardModel
@@ -41,5 +40,4 @@ func attempt_play() -> bool:
 		return false
 	
 	resource_component.spend(model.data.cost)
-	card_played.emit()
 	return true

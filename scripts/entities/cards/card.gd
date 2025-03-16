@@ -15,10 +15,7 @@ func initialize(model_ref: CardModel, view_scene: PackedScene) -> void:
 	model.logic.playability_changed.connect(view.update_playable_visuals)
 	view.drag_started.connect(_on_view_drag_start)
 	view.drag_ended.connect(_on_view_drag_end)
-	
-	# Assumes parent is a CardHoverSystem that connects signals.
-	if get_parent() and get_parent().has_method("connect_card_signals"):
-		get_parent().connect_card_signals(self)
+	EventBus.card_played.connect(_on_card_played)
 
 func _on_view_drag_start() -> void:
 	# Forward to drag system
@@ -27,3 +24,8 @@ func _on_view_drag_start() -> void:
 func _on_view_drag_end() -> void:
 	# Forward to drag system
 	EventBus.card_drag_ended.emit(self)
+
+func _on_card_played(card: Card) -> void:
+	if card == self:
+		view.update_playable_visuals(false)
+		view.set_interactable(false)

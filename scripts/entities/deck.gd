@@ -3,7 +3,6 @@ class_name Deck extends Node3D
 const CARD_Z_OFFSET: float = 0.005
 
 @export var card_loader: CardLoader
-@export var card_hover_system: CardHoverSystem
 @export var player: Player
 @export var deck_definition: DeckDefinition
 
@@ -18,7 +17,7 @@ func initialize_deck() -> void:
 	
 	for card_data in deck_definition.cards:
 		var card: Card = card_loader.create_card(card_data, player)
-		card_hover_system.add_child(card)
+		player.add_child(card)
 		cards.append(card)
 		
 		var z_position = (total_cards - 1 - index) * CARD_Z_OFFSET
